@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, ParseIntPipe} from '@nestjs/common';
 
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -25,10 +25,8 @@ export class UsersService {
     return user;
   }
 
-  async findById(id: number) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return await User.findOne(id);
+  async findById(id) {
+    return await User.findOneBy({ id: id });
   }
 
   async findByEmail(email: string) {
